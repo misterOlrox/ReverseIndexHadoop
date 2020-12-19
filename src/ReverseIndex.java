@@ -25,6 +25,7 @@ import java.util.concurrent.ConcurrentMap;
 public class ReverseIndex extends Configured implements Tool {
 
     public final static String SEPARATOR = "\t";
+    public final static String DELIMITERS = " /.,‚!`?:;‘’“”*_+—…')(\n!=\"\t#$%>@&-0123456789<{}[]";
 
     public static class Map
             extends Mapper<LongWritable, Text, Text, Text> {
@@ -50,7 +51,7 @@ public class ReverseIndex extends Configured implements Tool {
                 throw new NullPointerException("No article name!!!");
             }
             String line = value.toString();
-            StringTokenizer tokenizer = new StringTokenizer(line);
+            StringTokenizer tokenizer = new StringTokenizer(line, DELIMITERS);
             while (tokenizer.hasMoreTokens()) {
                 context.write(new Text(tokenizer.nextToken()), articleName);
             }
