@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class ReverseIndex extends Configured implements Tool {
 
@@ -26,7 +28,9 @@ public class ReverseIndex extends Configured implements Tool {
 
     public static class Map
             extends Mapper<LongWritable, Text, Text, Text> {
-        private Text word = new Text();
+
+        private final static LongWritable ZERO = new LongWritable(0);
+        private final ConcurrentMap<String, Text> articleNameMap = new ConcurrentHashMap<>();
 
         @Override
         public void map(
@@ -36,12 +40,19 @@ public class ReverseIndex extends Configured implements Tool {
         ) throws IOException, InterruptedException {
             FileSplit fileSplit = (FileSplit) context.getInputSplit();
             String filename = fileSplit.getPath().getName();
+            if (key.equals(ZERO)) {
+                Text articleName = new Text(value);
+                articleNameMap.put(filename, articleName);
+            }
 
+            Text articleName = articleNameMap.get(filename);
+            if (articleName == null) {
+                throw new NullPointerException("No article name!!!");
+            }
             String line = value.toString();
             StringTokenizer tokenizer = new StringTokenizer(line);
             while (tokenizer.hasMoreTokens()) {
-                word.set(tokenizer.nextToken());
-                context.write(word, new Text(filename));
+                context.write(new Text(tokenizer.nextToken()), articleName);
             }
         }
     }

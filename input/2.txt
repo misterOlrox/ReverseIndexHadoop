@@ -1,10 +1,140 @@
-2qwerty
-qwerty
-qwerty
-qwerty
-qwerty
-qwerty
-qwerty
-qwerty
-qwerty
-qwerty
+Software framework
+From Wikipedia, the free encyclopedia
+Jump to navigationJump to search
+"Framework (computer science)" redirects here. For other uses, see Framework (disambiguation).
+In computer programming, a software framework is an abstraction in which software providing generic functionality can be selectively changed by additional user-written code, thus providing application-specific software. It provides a standard way to build and deploy applications and is a universal, reusable software environment that provides particular functionality as part of a larger software platform to facilitate the development of software applications, products and solutions. Software frameworks may include support programs, compilers, code libraries, toolsets, and application programming interfaces (APIs) that bring together all the different components to enable development of a project or system.
+
+Frameworks have key distinguishing features that separate them from normal libraries:
+
+inversion of control: In a framework, unlike in libraries or in standard user applications, the overall program's flow of control is not dictated by the caller, but by the framework.[1] This is usually achieved with the Template Method Pattern.
+default behaviour: This can be provided with the invariant methods of the Template Method Pattern in an abstract class which is provided by the framework.
+extensibility: A user can extend the framework – usually by selective overriding – or programmers can add specialized user code to provide specific functionality. This is usually achieved by a hook method in a subclass that overrides a template method in the superclass.
+non-modifiable framework code: The framework code, in general, is not supposed to be modified, while accepting user-implemented extensions. In other words, users can extend the framework, but cannot modify its code.
+
+Contents
+1	Rationale
+2	Examples
+3	Architecture
+4	See also
+5	References
+6	External links
+Rationale
+
+This section has multiple issues. Please help improve it or discuss these issues on the talk page. (Learn how and when to remove these template messages)
+This section needs additional citations for verification. (April 2011)
+This section may be too long and excessively detailed. (April 2020)
+This section contains weasel words: vague phrasing that often accompanies biased or unverifiable information. (April 2020)
+This section is written like a personal reflection, personal essay, or argumentative essay that states a Wikipedia editor's personal feelings or presents an original argument about a topic. (April 2020)
+The designers of software frameworks aim to facilitate software developments by allowing designers and programmers to devote their time to meeting software requirements rather than dealing with the more standard low-level details of providing a working system, thereby reducing overall development time.[2] For example, a team using a web framework to develop a banking website can focus on writing code particular to banking rather than the mechanics of request handling and state management.
+
+Frameworks often add to the size of programs, a phenomenon termed "code bloat". Due to customer-demand-driven applications needs, both competing and complementary frameworks sometimes end up in a product. Further, due to the complexity of their APIs, the intended reduction in overall development time may not be achieved due to the need to spend additional time learning to use the framework; this criticism is clearly valid when a special or new framework is first encountered by development staff.[citation needed] If such a framework is not used in subsequent job taskings, the time invested in learning the framework can cost more than purpose-written code familiar to the project's staff; many programmers keep copies of useful boilerplate for common needs.
+
+However, once a framework is learned, future projects can be faster and easier to complete; the concept of a framework is to make a one-size-fits-all solution set, and with familiarity, code production should logically rise. There are no such claims made about the size of the code eventually bundled with the output product, nor its relative efficiency and conciseness. Using any library solution necessarily pulls in extras and unused extraneous assets unless the software is a compiler-object linker making a tight (small, wholly controlled, and specified) executable module.
+
+The issue continues, but a decade-plus of industry experience[citation needed] has shown that the most effective frameworks turn out to be those that evolve from re-factoring the common code of the enterprise, instead of using a generic "one-size-fits-all" framework developed by third parties for general purposes. An example of that would be how the user interface in such an application package as an office suite grows to have common look, feel, and data-sharing attributes and methods, as the once disparate bundled applications, grow unified into a suite which is tighter and smaller; the newer/evolved suite can be a product that shares integral utility libraries and user interfaces.
+
+This trend in the controversy brings up an important issue about frameworks. Creating a framework that is elegant, versus one that merely solves a problem, is still rather a craft than a science. "Software elegance" implies clarity, conciseness, and little waste (extra or extraneous functionality, much of which is user defined). For those frameworks that generate code, for example, "elegance" would imply the creation of code that is clean and comprehensible to a reasonably knowledgeable programmer (and which is therefore readily modifiable), versus one that merely generates correct code. The elegance issue is why relatively few software frameworks have stood the test of time: the best frameworks have been able to evolve gracefully as the underlying technology on which they were built advanced. Even there, having evolved, many such packages will retain legacy capabilities bloating the final software as otherwise replaced methods have been retained in parallel with the newer methods.
+
+Examples
+Software frameworks typically contain considerable housekeeping and utility code in order to help bootstrap user applications, but generally focus on specific problem domains, such as:
+
+Artistic drawing, music composition, and mechanical CAD[3][4]
+Financial modeling applications[5]
+Earth system modeling applications[6]
+Decision support systems[7]
+Media playback and authoring
+Ajax framework / JavaScript framework
+Web framework
+Middleware
+Cactus Framework - High performance scientific computing.
+Application framework - General GUI applications.
+Enterprise Architecture framework
+Oracle Application Development Framework
+Laravel ( PHP Framework )
+Architecture
+According to Pree,[8] software frameworks consist of frozen spots and hot spots. Frozen spots define the overall architecture of a software system, that is to say its basic components and the relationships between them. These remain unchanged (frozen) in any instantiation of the application framework. Hot spots represent those parts where the programmers using the framework add their own code to add the functionality specific to their own project.
+
+In an object-oriented environment, a framework consists of abstract and concrete classes. Instantiation of such a framework consists of composing and subclassing the existing classes.[9]
+
+The necessary functionality can be implemented by using the Template Method Pattern in which the frozen spots are known as invariant methods and the hot spots are known as variant or hook methods. The invariant methods in the superclass provide default behaviour while the hook methods in each subclass provide custom behaviour.
+
+When developing a concrete software system with a software framework, developers utilize the hot spots according to the specific needs and requirements of the system. Software frameworks rely on the Hollywood Principle: "Don't call us, we'll call you."[10] [11] This means that the user-defined classes (for example, new subclasses) receive messages from the predefined framework classes. Developers usually handle this by implementing superclass abstract methods.
+
+See also
+	Look up software framework in Wiktionary, the free dictionary.
+Class (computer science)
+Design pattern (computer science)
+Don't repeat yourself
+Implicit invocation
+Software engine
+References
+ Riehle, Dirk (2000), Framework Design: A Role Modeling Approach (PDF), Swiss Federal Institute of Technology
+ "Framework". DocForge. Retrieved 15 December 2008.[dead link]
+ Vlissides, J M; Linton, M A (1990), "Unidraw: a framework for building domain-specific graphical editors", ACM Transactions on Information Systems, 8 (3): 237–268, doi:10.1145/98188.98197, S2CID 11248368
+ Johnson, R E (1992), "Documenting frameworks using patterns", Proceedings of the Conference on Object Oriented Programming Systems Languages and Applications, ACM Press: 63–76
+ Birrer, A; Eggenschwiler, T (1993), "Proceedings of the European conference on object-oriented programming", Frameworks in the financial engineering domain: an experience report, Springer-Verlag, pp. 21–35
+ Hill, C; DeLuca, C; Balaji, V; Suarez, M; da Silva, A (2004), "Architecture of the Earth System Modeling Framework (ESMF)", Computing in Science and Engineering, 6: 18–28, doi:10.1109/MCISE.2004.1255817, S2CID 9311752
+ Gachet, A (2003), "Software Frameworks for Developing Decision Support Systems – A New Component in the Classification of DSS Development Tools", Journal of Decision Systems, 12 (3): 271–281, doi:10.3166/jds.12.271-280, S2CID 29690836
+ Pree, W (1994), "Meta Patterns: A Means for Capturing the Essentials of Reusable Object-Oriented Design", Proceedings of the 8th European Conference on Object-Oriented Programming, Lecture Notes in Computer Science, Springer-Verlag, 821: 150–162, CiteSeerX 10.1.1.74.7935, doi:10.1007/BFb0052181, ISBN 978-3-540-58202-1
+ Buschmann, F (1996), Pattern-Oriented Software Architecture Volume 1: A System of Patterns. Chichester, Wiley, ISBN 978-0-471-95869-7
+ Larman, C (2001), Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and the Unified Process (2nd ed.), Prentice Hall, ISBN 978-0-13-092569-5
+ Gamma, Erich; Helm, Richard; Johnson, Ralph; Vlissides, John (1994). Design Patterns. Addison-Wesley. ISBN 0-201-63361-2.
+External links
+	Wikimedia Commons has media related to Software frameworks.
+
+Authority control Edit this at Wikidata
+BNF: cb11991188g (data)GND: 4464685-9LCCN: sh2013002773
+Categories: Object-oriented programmingSoftware architectureSoftware design patternsSoftware frameworks
+Navigation menu
+Not logged in
+Talk
+Contributions
+Create account
+Log in
+ArticleTalk
+ReadEditView historySearch
+Search Wikipedia
+Main page
+Contents
+Current events
+Random article
+About Wikipedia
+Contact us
+Donate
+Contribute
+Help
+Learn to edit
+Community portal
+Recent changes
+Upload file
+Tools
+What links here
+Related changes
+Special pages
+Permanent link
+Page information
+Cite this page
+Wikidata item
+Print/export
+Download as PDF
+Printable version
+In other projects
+Wikimedia Commons
+
+Languages
+العربية
+বাংলা
+Deutsch
+Español
+Français
+日本語
+Português
+Русский
+中文
+25 more
+Edit links
+This page was last edited on 28 November 2020, at 01:13 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+Privacy policyAbout WikipediaDisclaimersContact WikipediaMobile viewDevelopersStatisticsCookie statementWikimedia FoundationPowered by MediaWiki
+In object-oriented programming, the template method is one of the behavioral design patterns identified by Gamma et al. in the book Design Patterns. The template method is a method in a superclass, usually an abstract superclass, and defines the skeleton of an operation in terms of a number of high-level steps. These steps are themselves implemented by additional helper methods in the same class as the template method.
+
