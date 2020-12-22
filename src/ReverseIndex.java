@@ -6,7 +6,6 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
@@ -19,8 +18,6 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 public class ReverseIndex extends Configured implements Tool {
 
@@ -31,7 +28,7 @@ public class ReverseIndex extends Configured implements Tool {
             extends Mapper<LongWritable, Text, Text, Text> {
 
         private final static LongWritable ZERO = new LongWritable(0);
-        private final ConcurrentMap<String, Text> articleNameMap = new ConcurrentHashMap<>();
+        private Text articleName;
 
         @Override
         public void map(
@@ -39,17 +36,14 @@ public class ReverseIndex extends Configured implements Tool {
                 Text value,
                 Context context
         ) throws IOException, InterruptedException {
-            FileSplit fileSplit = (FileSplit) context.getInputSplit();
-            String filename = fileSplit.getPath().getName();
             if (key.equals(ZERO)) {
-                Text articleName = new Text(value);
-                articleNameMap.put(filename, articleName);
+                articleName = new Text();
+                articleName.set(value);
             }
-
-            Text articleName = articleNameMap.get(filename);
             if (articleName == null) {
                 throw new NullPointerException("No article name!!!");
             }
+
             String line = value.toString();
             StringTokenizer tokenizer = new StringTokenizer(line, DELIMITERS);
             while (tokenizer.hasMoreTokens()) {
@@ -60,6 +54,7 @@ public class ReverseIndex extends Configured implements Tool {
 
     public static class Reduce
             extends Reducer<Text, Text, Text, Text> {
+
         @Override
         public void reduce(
                 Text key,
@@ -85,6 +80,7 @@ public class ReverseIndex extends Configured implements Tool {
         job.setReducerClass(Reduce.class);
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
+        job.setNumReduceTasks(1);
         FileInputFormat.setInputPaths(job, new Path("input"));
         FileOutputFormat.setOutputPath(job, new Path("output"));
         FileUtils.deleteDirectory(new File("output"));
