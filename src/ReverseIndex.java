@@ -40,9 +40,6 @@ public class ReverseIndex extends Configured implements Tool {
                 articleName = new Text();
                 articleName.set(value);
             }
-            if (articleName == null) {
-                throw new NullPointerException("No article name!!!");
-            }
 
             String line = value.toString();
             StringTokenizer tokenizer = new StringTokenizer(line, DELIMITERS);
@@ -72,7 +69,7 @@ public class ReverseIndex extends Configured implements Tool {
     public int run(String[] args) throws Exception {
         Job job = new Job(getConf());
         job.setJarByClass(ReverseIndex.class);
-        job.setJobName("wordcount");
+        job.setJobName("reverse-index");
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
         job.setMapperClass(Map.class);
